@@ -22,6 +22,12 @@ def clear_screen() -> None:
 def blink(text: str) -> str:
     return f"\033[5m{text}\033[0m"
 
+def print_blinking(cells: Iterable[str], positions: Iterable[int]) -> None:
+    mutable_cells = list(cells)
+    for position in positions:
+        mutable_cells[position] = blink(mutable_cells[position])
+    print_solid(mutable_cells)
+
 def print_solid(cells: Iterable[str]) -> None:
     print(
         textwrap.indent(
