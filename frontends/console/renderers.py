@@ -30,7 +30,7 @@ def print_blinking(cells: Iterable[str], positions: Iterable[int]) -> None:
 
 def print_solid(cells: Iterable[str]) -> None:
     print(
-        textwrap.indent(
+        textwrap.dedent(
             """\
              A   B   C
            ------------
@@ -40,5 +40,5 @@ def print_solid(cells: Iterable[str]) -> None:
           ┆ ───┼───┼───
         3 ┆  {6} │ {7} │ {8}
     """
-        )
+        ).format(*cells)
     )
