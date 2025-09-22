@@ -12,7 +12,7 @@ def validate_grid(grid: Grid) -> None:
         raise ValueError("Must contain 9 cells of: X, O, or space")
 
 def validate_game_state(game_state: GameState):
-    validaye_number_of_marks(game_state.grid)
+    validate_number_of_marks(game_state.grid)
     validate_starting_mark(game_state.grid, game_state.starting_mark)
     validate_winner(
         game_state.grid, game_state.starting_mark, game_state.winner
@@ -29,3 +29,19 @@ def validate_starting_mark(grid: Grid, starting_mark: Mark) -> None:
     elif grid.o_count > grid.x_count:
         if starting_mark != "O":
             raise InvalidGameState("Wrong starting mark")
+
+def validate_winner(grid: Grid, starting_mark: Mark, winner: Mark | None) -> None:
+    if winner == "X":
+        if starting_mark == "X":
+            if grid.x_count <= grid.o_count:
+                raise InvalidGameState("Wrong number of Xs")
+        else:
+            if grid.x_count != grid.o_count:
+                raise InvalidGameState("Wrong number of Xs")
+    elif winner == "O":
+        if starting_mark == "O":
+            if grid.o_count <= grid.x_count:
+                raise InvalidGameState("Wrong number of Os")
+        else:
+            if grid.o_count != grid.x_count:
+                raise InvalidGameState("Wrong number of Os")
