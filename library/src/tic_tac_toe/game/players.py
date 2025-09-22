@@ -1,4 +1,5 @@
 import abc
+import time
 
 from tic_tac_toe.logic.exceptions import InvalidMove
 from tic_tac_toe.logic.models import Mark, GameState, Move
@@ -18,4 +19,18 @@ class Player(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def get_move(self, game_state: GameState) -> Move | None:
         """Return the current player's move in the given game state.
+        """
+
+class ComputerPlayer(Player, metaclass=abc.ABCMeta):
+    def __init__(self, mark: Mark, delay_seconds: float = 0.25) -> None:
+        super().__init__(mark)
+        self.delay_seconds = delay_seconds
+    
+    def get_move(self, game_state: GameState) -> Move | None:
+        time.sleep(self.delay_seconds)
+        return self.get_computer_move(game_state)
+    
+    @abc.abstractmethod
+    def get_computer_move(self, game_state: GameState) -> Move | None:
+        """Return the computer's move in the given game state.
         """
