@@ -1,6 +1,7 @@
 #!/bin/env python3
 import re
 import enum
+import random
 from dataclasses import dataclass
 from functools import cached_property
 
@@ -104,6 +105,12 @@ class GameState:
             for match in re.finditer(r"\s", self.grid.cells):
                 moves.append(self.make_move_to(match.start()))
         return moves
+    
+    def make_random_move(self) -> Move | None:
+        try:
+            return random.choice(self.possible_moves)
+        except IndexError:
+            return None
     
     def make_move_to(self, index: int) -> Move:
         if self.grid.cells[index] != " ":
