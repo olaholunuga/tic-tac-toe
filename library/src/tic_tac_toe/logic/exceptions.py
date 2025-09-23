@@ -4,3 +4,7 @@ class InvalidGameState(Exception):
     """
 class InvalidMove(Exception):
     """Raised when a player makes an invalid move to any occupied position"""
+
+class UnknownGameScore(Exception):
+    """Raised when the game score is unknown
+    """
