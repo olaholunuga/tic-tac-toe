@@ -50,6 +50,6 @@ class MinimaxComputerPlayer(ComputerPlayer):
     def get_computer_move(self, game_state: GameState) -> Move | None:
         # return find_best_move(game_state)
         if game_state.game_not_started:
-            return game_state.make_ramdom_move()
+            return game_state.make_random_move()
         else:
             return find_best_move(game_state)
